@@ -1,0 +1,13 @@
+{
+    "greeting": "Hello World",
+    "introduction": {
+      "welcome": "Welcome to our application",
+      "description": "This is an example of internationalization."
+    },
+    "menu": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact Us"
+    }
+  }
+  
