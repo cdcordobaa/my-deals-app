@@ -4,7 +4,7 @@ import { useGrid } from './composables/useGrid';
 import TableHeader from './TableHeader.vue';
 import TableRow from './TableRow.vue';
 import SearchBox from './SearchBox.vue';
-import DetailsPane from './DetailsPane.vue'; // Import the DetailsPane component
+import DetailsPanel from './DetailsPanel.vue';
 import { Column } from './types/gridTypes';
 import { useSelectedStore } from './stores/selectedStore';
 
@@ -25,9 +25,9 @@ console.log("Grid", selectedItem, isPanelOpen);
         </tbody>
       </table>
     </div>
-    <div v-if="isPanelOpen" class="w-96 bg-white shadow-lg transition-all">
-      <DetailsPane />
-    </div>
+
+    <DetailsPanel />
+
   </div>
 </template>
 
