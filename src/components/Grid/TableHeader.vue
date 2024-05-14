@@ -8,8 +8,7 @@ const sortStore = useSortStore();
 const emit = defineEmits(['toggle-all-selection']);
 
 const areAllSelected = computed(() => {
-    // This computed property will be used to check the checkbox state
-    return false; // Placeholder, actual logic will be in Grid.vue
+    return false; 
 });
 
 const toggleAllSelection = (event: Event) => {
@@ -24,12 +23,14 @@ const handleSort = (column: string) => {
 </script>
 
 <template>
-    <thead>
-        <tr>
-                <th>
-                    <input type="checkbox" @change="toggleAllSelection" :checked="areAllSelected">
-                </th>
-            <th v-for="column in props.columns" :key="column.key" @click="handleSort(column.key)">
+                <thead class="bg-gray-100">
+                <tr>
+                        <th>
+                            <input type="checkbox" @change="toggleAllSelection" :checked="areAllSelected"
+                                class="rounded text-indigo-600 focus:ring-indigo-500">
+                        </th>
+                        <th v-for="column in props.columns" :key="column.key" @click="handleSort(column.key)"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700">
                 {{ column.label }}
                 <span v-if="sortStore.sortColumn === column.key && sortStore.sortOrder === 'asc'">⬆️</span>
                 <span v-if="sortStore.sortColumn === column.key && sortStore.sortOrder === 'desc'">⬇️</span>
@@ -38,6 +39,3 @@ const handleSort = (column: string) => {
     </thead>
 </template>
 
-<style scoped>
-/* Tailwind CSS for styling if needed */
-</style>

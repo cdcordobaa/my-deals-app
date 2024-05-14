@@ -17,13 +17,15 @@ const columns = ref([
 </script>
 
 <template>
-    <div>
-        <h1>Items</h1>
-                        <GridComponent :items="deals" :columns="columns">
-                                <template v-slot:details="{ item }">
-                        <DealDetails :deal="item as Deal" />
-                            </template>
-                        </GridComponent>
-    </div>
+              <div class="container mx-auto px-4 py-6 bg-gray-100 animate-bg-move">
+                <h1 class="text-3xl font-bold  mb-4 shadow">Deals List</h1>
+                <GridComponent :items="deals" :columns="columns" class="bg-white shadow-lg rounded-xl">
+                  <template v-slot:details="{ item }">
+                    <DealDetails :deal="item as Deal" />
+                  </template>
+                </GridComponent>
+              </div>
 </template>
+
+
 

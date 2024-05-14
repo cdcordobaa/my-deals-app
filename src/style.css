@@ -5,12 +5,18 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #f0f0f0; 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #007bff; 
+  --secondary-color: #535bf2;
+  --background-color: #f0f0f0; 
+  --text-primary-color: #ffffff; 
+  --text-secondary-color: #213547;
 }
 
 a {
@@ -28,11 +34,14 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background-color); 
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--primary-color); 
+  text-shadow: 1px 1px 2px var(--secondary-color); 
 }
 
 button {
@@ -58,6 +67,7 @@ button:focus-visible {
 
 .card {
   padding: 2em;
+  border-radius: 20px; 
 }
 
 #app {
@@ -70,7 +80,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #ffffff; 
   }
   a:hover {
     color: #747bff;
@@ -83,13 +93,13 @@ button:focus-visible {
 table {
   width: 100%;
   text-align: left;
-  color: #4B5563; /* Adjusted for better contrast */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Softer shadow */
+  color: #4B5563; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   border-collapse: separate;
-  border-radius: 16px; /* More rounded corners */
+  border-radius: 16px; 
 }
 th, td {
-  padding: 16px 24px; /* More spacious */
+  padding: 16px 24px; 
   text-align: left;
 }
 thead {
@@ -102,5 +112,5 @@ tbody tr:nth-child(even) {
   background-color: #F3F4F6;
 }
 tbody tr:hover {
-  background-color: #E5E7EB; /* Subtle hover effect */
+  background-color: #E5E7EB; 
 }
