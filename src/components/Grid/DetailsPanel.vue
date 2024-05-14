@@ -10,13 +10,12 @@ console.log("DetailsPane", item, store.selectedItem, store.isPanelOpen);
 </script>
 
 <template>
-  <div>
-    <div v-if="store.isPanelOpen" class="details-panel open text-black">
-      <div v-for="(value, key) in item" :key="key">
-        <strong>{{ key }}:</strong> {{ value }}
-      </div>
-      <button @click="store.closePanel">Close</button>
-    </div>
+        <div v-if="store.isPanelOpen" class="details-panel open text-black">
+          <button @click="store.closePanel">Close</button>
+          <slot  name="panel" :item="store.selectedItem">
+            <h1>Details</h1>
+          </slot>
+          <h2>what</h2>
   </div>
 </template>
 
