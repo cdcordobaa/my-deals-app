@@ -131,9 +131,21 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div v-if="selectedItems.size > 0" class="table-actions">
-    <button @click="deleteSelected" class="mb-4 p-2 rounded bg-red-500 text-white">Delete Selected</button>
-    <button @click="exportSelected" class="mb-4 p-2 rounded bg-blue-500 text-white">Export Selected</button>
+  <div>
+    <font-awesome-icon icon="user" />
+    <font-awesome-icon :icon="['fas', 'coffee']" />
+  </div>
+  <div v-if="selectedItems.size > 0" class="table-actions flex justify-between p-4 bg-gray-100 rounded-lg shadow">
+    <button @click="deleteSelected"
+      class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+      <font-awesome-icon icon="trash-alt" class="mr-2" />
+      Delete Selected
+    </button>
+    <button @click="exportSelected"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out">
+      <font-awesome-icon icon="file-export" class="mr-2" />
+      Export Selected
+    </button>
   </div>
   <div class="flex">
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg flex-grow">
@@ -146,16 +158,16 @@ watchEffect(() => {
               </div>
             </th>
             <th scope="col" class="py-3 px-6" @click="sortBy('issuer_name')">
-              Issuer
-              <span v-if="sortColumn === 'issuer_name'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+              Issuer <font-awesome-icon
+                :icon="['fas', sortColumn === 'issuer_name' && sortOrder === 'asc' ? 'arrow-up' : 'arrow-down']" />
             </th>
             <th scope="col" class="py-3 px-6" @click="sortBy('deal_name')">
-              Deal Name
-              <span v-if="sortColumn === 'deal_name'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+              Deal Name <font-awesome-icon
+                :icon="['fas', sortColumn === 'deal_name' && sortOrder === 'asc' ? 'arrow-up' : 'arrow-down']" />
             </th>
             <th scope="col" class="py-3 px-6" @click="sortBy('industry')">
-              Industry
-              <span v-if="sortColumn === 'industry'">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+              Industry <font-awesome-icon
+                :icon="['fas', sortColumn === 'industry' && sortOrder === 'asc' ? 'arrow-up' : 'arrow-down']" />
             </th>
           </tr>
         </thead>
@@ -186,18 +198,19 @@ watchEffect(() => {
     </div>
   </div>
   <div :class="['panel-container', { closed: !isPanelOpen }]">
-    <button @click="closePanel" class="mb-4 p-2 rounded bg-red-500 text-white">Close</button>
-    <div v-if="selectedItem" class="space-y-2 text-black">
-      <h1> Hi</h1>
-      <h3 class="text-lg font-bold">{{ selectedItem.deal_name }}</h3>
-      <p><strong>Issuer:</strong> {{ selectedItem.issuer_name }}</p>
-      <p><strong>Bloomberg ID:</strong> {{ selectedItem.bloomberg_id }}</p>
-      <p><strong>Total:</strong> {{ selectedItem.total }}</p>
-      <p><strong>Industry:</strong> {{ selectedItem.industry }}</p>
-      <p><strong>Status:</strong> {{ selectedItem.status }}</p>
-      <p><strong>Analysts:</strong> <span v-for="analyst in selectedItem.analysts" :key="analyst">{{ analyst }}</span>
-      </p>
-      <p><strong>Document Count:</strong> {{ selectedItem.doc_count }}</p>
+    <button @click="closePanel"
+      class="close-button bg-transparent hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+      <font-awesome-icon icon="times" /> Close
+    </button>
+    <div v-if="selectedItem" class="item-details flex flex-col items-center justify-center text-center w-full">
+      <h3>{{ selectedItem.deal_name }}</h3>
+      <p><strong>Issuer:</strong> <span>{{ selectedItem.issuer_name }}</span></p>
+      <p><strong>Bloomberg ID:</strong> <span>{{ selectedItem.bloomberg_id }}</span></p>
+      <p><strong>Total:</strong> <span>{{ selectedItem.total }}</span></p>
+      <p><strong>Industry:</strong> <span>{{ selectedItem.industry }}</span></p>
+      <p><strong>Status:</strong> <span>{{ selectedItem.status }}</span></p>
+      <p><strong>Analysts:</strong> <span v-for="analyst in selectedItem.analysts" :key="analyst">{{ analyst }}</span></p>
+      <p><strong>Document Count:</strong> <span>{{ selectedItem.doc_count }}</span></p>
       <p><strong>Custom Identifiers:</strong> <span v-for="identifier in selectedItem.custom_deal_identifiers"
           :key="identifier">{{ identifier }}</span></p>
     </div>
@@ -211,27 +224,42 @@ watchEffect(() => {
   right: 0;
   width: 30%;
   height: 100%;
-  background: white;
+  background: #ffffff;
   z-index: 1000;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   overflow: auto;
   transition: transform 0.3s ease-in-out;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 12px 0 0 12px;
 }
 
 .panel-container.closed {
   transform: translateX(100%);
 }
 
-.table-actions {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  background-color: #f3f4f6;
-  border-bottom: 1px solid #e5e7eb;
-  position: sticky;
-  top: 0;
-  z-index: 11;
+.close-button {
+  align-self: end;
+  margin-bottom: 20px;
+}
+
+.item-details h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.item-details p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #666;
+}
+
+.item-details strong {
+  font-weight: bold;
+  color: #333;
 }
 </style>
-
 

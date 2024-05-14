@@ -36,18 +36,20 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  border: none;
+  padding: 0.8em 1.6em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
+  color: #333333;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #f0f0f0;
+  color: #000000;
 }
 button:focus,
 button:focus-visible {
@@ -76,4 +78,29 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  color: #4B5563; /* Adjusted for better contrast */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Softer shadow */
+  border-collapse: separate;
+  border-radius: 16px; /* More rounded corners */
+}
+th, td {
+  padding: 16px 24px; /* More spacious */
+  text-align: left;
+}
+thead {
+  background-color: #F9FAFB;
+}
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+tbody tr:nth-child(even) {
+  background-color: #F3F4F6;
+}
+tbody tr:hover {
+  background-color: #E5E7EB; /* Subtle hover effect */
 }
