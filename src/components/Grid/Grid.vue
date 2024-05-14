@@ -10,12 +10,21 @@ import { useSelectedStore } from './stores/selectedStore';
 import { useSelectionStore } from './stores/selectedItemsStore';
 
 const props = defineProps<{ items: Record<string, any>[]; columns: Column[]; }>();
-defineSlots<{
-  details: (slotProps: { item: Object }) => void;
-}>();
 const { filteredAndSortedItems } = useGrid(props.items);
-const { selectedItem, isPanelOpen } = useSelectedStore();
-const { exportSelected, selectedItems } = useSelectionStore();
+const { selectedItem, isPanelOpen, } = useSelectedStore();
+const { toggleSelection, selectedItems, clearSelection, exportSelected } = useSelectionStore();
+
+const handleToggleAllSelection = (selectAll: boolean) => {
+  if (selectAll) {
+    filteredAndSortedItems.value.forEach(item => {
+      if (!selectedItems.has(item.id)) {
+        toggleSelection(item.id);
+      }
+    });
+  } else {
+    clearSelection();
+  }
+};
 
 const exportSelectedItems = () => {
   if (selectedItems.size === 0) {
@@ -41,7 +50,7 @@ console.log("Grid", selectedItem, isPanelOpen);
 
       <SearchBox />
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <TableHeader :columns="props.columns" />
+        <TableHeader :columns="props.columns" @toggle-all-selection="handleToggleAllSelection" />
         <tbody>
           <TableRow v-for="item in filteredAndSortedItems" :key="item.id" :item="item" :columns="props.columns" />
         </tbody>
