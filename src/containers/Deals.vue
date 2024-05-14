@@ -19,4 +19,3 @@ const dealColumns = ref([
         <GridComponent :items="deals" :columns="dealColumns" />
     </div>
 </template>
-../mocks/data
