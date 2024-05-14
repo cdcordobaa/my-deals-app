@@ -1,21 +1,14 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-import type { Deal } from '@/types/deals';
+import { defineProps } from 'vue';
 
 const props = defineProps<{
-    deal: Deal;
+    item: Record<string, any>;
 }>();
-
-const emit = defineEmits(['selectDeal']);
-
-const selectDeal = () => {
-    emit('selectDeal', props.deal);
-};
 </script>
 
 <template>
-    <tr @click="selectDeal">
-        <td v-for="(value, key) in props.deal" :key="key">{{ value }}</td>
+    <tr>
+        <td v-for="(value, key) in props.item" :key="key">{{ value }}</td>
     </tr>
 </template>
 

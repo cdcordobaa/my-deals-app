@@ -1,21 +1,25 @@
 <script setup lang="ts">
-const props = defineProps<{
-    columns: Array<{ key: string; label: string; sortable: boolean; filterable: boolean; }>
-}>();
+import { defineProps } from 'vue';
+import { useSortStore } from './stores/sortStore';
+import type { Column } from './gridTypes';
 
-const emit = defineEmits(['sortColumn']);
-const sortColumn = (key: string) => {
-    emit('sortColumn', key);
+const props = defineProps<{ columns: Column[] }>();
+const sortStore = useSortStore();
+
+const handleSort = (column: string) => {
+    if (props.columns.find(col => col.key === column)?.sortable) {
+        sortStore.setSort(column);
+    }
 };
 </script>
 
 <template>
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+    <thead>
         <tr>
-            <th scope="col" class="p-4" v-for="column in props.columns" :key="column.key"
-                @click="column.sortable ? sortColumn(column.key) : null">
+            <th v-for="column in props.columns" :key="column.key" @click="handleSort(column.key)">
                 {{ column.label }}
-                <span v-if="column.sortable">⬆️⬇️</span>
+                <span v-if="sortStore.sortColumn === column.key && sortStore.sortOrder === 'asc'">⬆️</span>
+                <span v-if="sortStore.sortColumn === column.key && sortStore.sortOrder === 'desc'">⬇️</span>
             </th>
         </tr>
     </thead>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
+import { useFilterStore } from './stores/filterStore';
 
-const emits = defineEmits(['updateSearchQuery']);
+const filterStore = useFilterStore();
 const searchQuery = ref('');
 
 const updateSearch = () => {
-    emits('updateSearchQuery', searchQuery.value);
+    filterStore.setSearchQuery(searchQuery.value);
 };
 </script>
 
