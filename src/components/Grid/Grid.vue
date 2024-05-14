@@ -102,11 +102,11 @@ const exportSelected = () => {
   const columns = ['id', 'issuer_name', 'deal_name', 'industry'];
   const headerString = columns.join(',') + '\n';
   const csvContent = itemsArray.reduce((acc, item) => {
-    const row = columns.map(fieldName => JSON.stringify(item[fieldName], replacer)).join(',');
+    const row = columns.map(fieldName => JSON.stringify(item?.[fieldName], replacer)).join(',');
     return acc + row + '\n';
   }, headerString);
 
-  function replacer(key, value) {
+  function replacer(_key: any, value: null) {
     return value === null ? '' : value; // Handle null values
   }
 
@@ -125,7 +125,7 @@ watchEffect(() => {
   if (searchQuery.value === '') {
     filteredItems.value = [...allItems.value];
   } else {
-    searchItems();
+    debounceSearchItems();
   }
 });
 </script>
