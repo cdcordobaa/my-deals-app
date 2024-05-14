@@ -8,6 +8,7 @@ import { Column } from './gridTypes';
 
 const props = defineProps<{ items: Record<string, any>[]; columns: Column[]; }>();
 const { filteredAndSortedItems } = useGrid(props.items);
+console.log(props.items, filteredAndSortedItems);
 </script>
 
 <template>

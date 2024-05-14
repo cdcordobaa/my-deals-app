@@ -2,27 +2,34 @@ import { computed } from "vue";
 import { useSortStore } from "../stores/sortStore";
 import { useFilterStore } from "../stores/filterStore";
 
-export function useGrid<T>(items: T[]) {
+export function useGrid<T extends Record<string, any>>(items: T[]) {
   const sortStore = useSortStore();
   const filterStore = useFilterStore();
 
   const filteredAndSortedItems = computed(() => {
-    let filtered = items.filter((item: any) =>
-      item[filterStore.searchQuery as keyof typeof item]
-        ?.toString()
-        .toLowerCase()
-        .includes(filterStore.searchQuery.toLowerCase())
-    );
-    return filtered.sort((a: any, b: any) => {
+    let filtered = items;
+
+    if (filterStore.searchQuery) {
+      filtered = items.filter((item) => {
+        const searchLower = filterStore.searchQuery.toLowerCase();
+        return Object.keys(item).some((key) =>
+          String(item[key]).toLowerCase().includes(searchLower)
+        );
+      });
+    }
+
+    if (sortStore.sortColumn) {
       const order = sortStore.sortOrder === "asc" ? 1 : -1;
-      return (
-        (a[sortStore.sortColumn as keyof typeof a] >
-        b[sortStore.sortColumn as keyof typeof b]
-          ? 1
-          : -1) * order
-      );
-    });
+      filtered = filtered.sort((a, b) => {
+        const valueA = String(a[sortStore.sortColumn]);
+        const valueB = String(b[sortStore.sortColumn]);
+        return valueA.localeCompare(valueB) * order;
+      });
+    }
+
+    return filtered;
   });
 
   return { filteredAndSortedItems };
 }
+

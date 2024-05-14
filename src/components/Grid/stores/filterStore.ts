@@ -7,6 +7,7 @@ export const useFilterStore = defineStore("filter", {
   }),
   actions: {
     setSearchQuery(query: string) {
+      console.log("Setting search query to", query);
       this.searchQuery = query;
     },
   },

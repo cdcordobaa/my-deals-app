@@ -5,15 +5,17 @@ import { mockData } from '../mocks/data'; // Assume mockData can be any array of
 
 const deals = ref(mockData);
 const columns = ref([
+    { key: 'id', label: 'ID', sortable: true },
     { key: 'issuer_name', label: 'Issuer', sortable: true, filterable: true },
     { key: 'deal_name', label: 'Deal Name', sortable: true },
+    { key: 'total', label: 'Deal Amount', sortable: true },
 ]);
 </script>
 
 <template>
     <div>
-                    <h1>Items</h1>
-                    <GridComponent :items="deals" :columns="columns" />
+        <h1>Items</h1>
+        <GridComponent :items="deals" :columns="columns" />
     </div>
 </template>
 
