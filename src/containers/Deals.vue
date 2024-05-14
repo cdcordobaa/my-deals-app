@@ -2,14 +2,10 @@
 import { ref } from 'vue';
 import GridComponent from '../components/Grid/Grid.vue';
 import DealDetails from './DealDetails.vue';
-import { mockData } from '../mocks/data'; // Assume mockData can be any array of objects
+import { mockData } from '../mocks/data';
 import { Deal } from '@/types/deals';
 
-interface SlotProps {
-    item: Deal;
-}
 
-let slotProps: SlotProps;
 
 const deals = ref<Deal[]>(mockData);
 const columns = ref([

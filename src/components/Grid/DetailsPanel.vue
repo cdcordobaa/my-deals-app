@@ -13,9 +13,8 @@ console.log("DetailsPane", item, store.selectedItem, store.isPanelOpen);
         <div v-if="store.isPanelOpen" class="details-panel open text-black">
           <button @click="store.closePanel">Close</button>
           <slot  name="panel" :item="store.selectedItem">
-            <h1>Details</h1>
+            <h1>Panel Content</h1>
           </slot>
-          <h2>what</h2>
   </div>
 </template>
 
