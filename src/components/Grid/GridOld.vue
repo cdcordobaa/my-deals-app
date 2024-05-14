@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, defineProps, onMounted, watchEffect } from 'vue';
-import type { Column } from './grid.types';
+import type { Column } from './types/gridTypes';
 import { debounce } from 'lodash-es';
 import Fuse from 'fuse.js';
 import { Deal } from '@/types/deals';

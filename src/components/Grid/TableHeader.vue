@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { useSortStore } from './stores/sortStore';
-import type { Column } from './gridTypes';
+import type { Column } from './types/gridTypes';
 
 const props = defineProps<{ columns: Column[] }>();
 const sortStore = useSortStore();
@@ -28,3 +28,4 @@ const handleSort = (column: string) => {
 <style scoped>
 /* Tailwind CSS for styling if needed */
 </style>
+./types/gridTypes
